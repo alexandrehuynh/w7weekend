@@ -25,6 +25,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
+    margin-bottom: 10px;
 }
 
 button {
@@ -42,41 +43,22 @@ button:hover {
     background-color: #0056b3;
 }
 
-#weatherDisplay {
+.weather-container {
+    display: flex; /* This will place child divs side by side */
+    justify-content: space-around; /* This will add space around the child divs */
+    flex-wrap: wrap; /* This allows the child divs to wrap onto the next line if the screen is too small */
+    width: 90%;
+    max-width: 1000px; /* Adjust the max-width as needed */
+    margin: 0 auto;
+}
+
+.weather-section {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    width: 100%;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease;
+    width: 45%; /* Adjust the width as needed */
+    margin-bottom: 13px; /* To maintain spacing between sections */
 }
 
-.weather-icon {
-    font-size: 50px;
-    margin: 20px 0;
-}
-
-.temp-high-low {
-    display: flex;
-    justify-content: space-between;
-    font-size: 30px;
-    margin: 20px 0;
-}
-
-.forecast {
-    color: #333;
-    font-size: 1em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 10px;
-
-}
-
-.humidity {
-    font-size: 20px;
-    color: #555;
-    margin-bottom: 10px;
-}
+/* Additional styles */

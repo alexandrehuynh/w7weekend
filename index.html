@@ -21,6 +21,39 @@
       </div>
       <div id="weatherDisplay"></div>
 
+      <div class="weather-container">
+        <div class="weather-section" id="weatherBasicInfo">
+            <!-- City, Population, Timezone, Sunrise, Sunset will go here -->
+        </div>
+        <div class="weather-section" id="weatherDetails">
+            <!-- Forecast, High, Low, Feels Like, Humidity, Icon will go here -->
+        </div>
+    </div>
+
+      <!-- Placeholder for Weather Widget; it will be populated by the main.js script -->
+    <div id="openweathermap-widget-11"></div>
+
+    <!-- Weather Widget Code: Does not support dynamic updating  -->
+    <div id="openweathermap-widget-11"></div>
+    <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
+    <script>
+    window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  
+    window.myWidgetParam.push({
+        id: 11,
+        cityid: '5391959',
+        appid: '4c3c2f072539b24766caea7157784667',
+        units: 'imperial',
+        containerid: 'openweathermap-widget-11',  
+    });  
+    (function() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.charset = "utf-8";
+        script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(script, s);  
+    })();
+    </script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
