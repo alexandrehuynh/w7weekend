@@ -59,34 +59,64 @@ function getWeatherData() {
       });
   }
 
-  function setupWeatherWidget(cityId, apiKey) {
-    // Clear any existing widget script
-    document.getElementById('openweathermap-widget-11').innerHTML = "";
-    const existingScript = document.getElementById('owm-widget-script');
-    if (existingScript) {
-        existingScript.remove();
-    }
+  function getCityImage(cityName) {
+    const accessKey = 'Rzv2tSGrFwf4LxvXUPZqSg9K5pqmX0Wv5SyIQDQRoc8'; 
+    const url = `https://api.unsplash.com/search/photos?page=1&query=${cityName}&client_id=${accessKey}`;
 
-    // Define the widget parameters with the new city ID
-    window.myWidgetParam = [{
-        id: 11,
-        cityid: cityId,
-        appid: apiKey,
-        units: 'imperial',
-        containerid: 'openweathermap-widget-11',
-    }];
-
-    // Create a new script element for the widget
-    var script = document.createElement('script');
-    script.id = 'owm-widget-script'; // Assign an ID for future reference
-    script.async = true;
-    script.charset = "utf-8";
-    script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
-    document.body.appendChild(script);
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Photo fetch response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.results && data.results.length > 0) {
+                const imageUrl = data.results[0].urls.regular;
+                const cityImageElem = document.getElementById('cityImage');
+                if (cityImageElem) {
+                    cityImageElem.src = imageUrl;
+                }
+            } else {
+                console.log('No images found for this city');
+            }
+        })
+        .catch(error => {
+            console.error('There has been a problem with fetching city image:', error);
+        });
 }
 
-  // Wait for the DOM to be fully loaded
-  document.addEventListener('DOMContentLoaded', function () {
-    // Attach the event listener to the button instead of the input
-    document.getElementById('getWeatherButton').addEventListener('click', getWeatherData);
-  });
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('getWeatherButton').addEventListener('click', function() {
+        const cityName = document.getElementById('locationInput').value.trim();
+        getWeatherData();
+        getCityImage(cityName);
+    });
+});
+// widget doesn't support dynamic
+
+//   function setupWeatherWidget(cityId, apiKey) {
+//     // Clear any existing widget script
+//     document.getElementById('openweathermap-widget-11').innerHTML = "";
+//     const existingScript = document.getElementById('owm-widget-script');
+//     if (existingScript) {
+//         existingScript.remove();
+//     }
+
+//     // Define the widget parameters with the new city ID
+//     window.myWidgetParam = [{
+//         id: 11,
+//         cityid: cityId,
+//         appid: apiKey,
+//         units: 'imperial',
+//         containerid: 'openweathermap-widget-11',
+//     }];
+
+//     // Create a new script element for the widget
+//     var script = document.createElement('script');
+//     script.id = 'owm-widget-script'; // Assign an ID for future reference
+//     script.async = true;
+//     script.charset = "utf-8";
+//     script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+//     document.body.appendChild(script);
+// }

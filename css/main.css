@@ -1,35 +1,44 @@
-body {
-    font-family: 'Open Sans', sans-serif;
-    background: url('./images/weatherbackground.jpeg') no-repeat center center fixed;
-    background-size: cover;
+/* General Reset */
+* {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-.input-container {
+/* Body and HTML for full height and width with scroll */
+html, body {
+    height: 100%;
+    min-height: 100vh; /* Ensure at least viewport height */
     width: 100%;
-    max-width: 400px;
-    text-align: center;
-    margin-bottom: 20px;
+    background: url('./images/weatherbackground.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Open Sans', sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scrollbar caused by overflowing content */
+    overflow-y: auto; /* Enable vertical scrolling if the content is taller than the viewport */
 }
 
+/* Container for Input */
+.input-container {
+    max-width: 400px;
+    width: 100%;
+    margin: 20px auto 20px; /* Center in the viewport with margin at the bottom */
+    text-align: center;
+}
+
+/* Input Field Styling */
 #locationInput {
-    width: 70%;
+    width: calc(100% - 20px); /* Full width minus padding */
     padding: 10px;
-    margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
-    margin-bottom: 10px;
 }
 
+/* Button Styling */
 button {
-    padding: 10px 20px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px; /* Margin above the button */
     background-color: #007bff;
     color: white;
     border: none;
@@ -43,22 +52,57 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Weather and Image Container */
 .weather-container {
-    display: flex; /* This will place child divs side by side */
-    justify-content: space-around; /* This will add space around the child divs */
-    flex-wrap: wrap; /* This allows the child divs to wrap onto the next line if the screen is too small */
+    max-width: 1000px;
     width: 90%;
-    max-width: 1000px; /* Adjust the max-width as needed */
-    margin: 0 auto;
+    margin: 20px auto; /* Center in the viewport with margin */
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
+/* Individual Weather Sections */
 .weather-section {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 45%; /* Adjust the width as needed */
-    margin-bottom: 13px; /* To maintain spacing between sections */
+    margin-bottom: 20px; /* Space between sections */
+    width: calc(50% - 40px); /* Half width minus padding */
 }
 
-/* Additional styles */
+#openweathermap-widget-11{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Responsive Image */
+#cityImage {
+    max-width: 100%; /* Ensure the image is not wider than its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Removes any extra space below the image */
+    margin: 20px auto; /* Margin above and below the image */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .weather-section {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    #cityImage {
+        width: 95%; /* Slightly less than full width for some margin */
+        margin-top: 0; /* Remove top margin on smaller screens */
+    }
+}
+
+/* Additional padding for content inside weather-section if needed */
+.weather-section p, .weather-section h2, .weather-section h3 {
+    padding: 5px 0; /* Padding top and bottom */
+}
+
+/* Additional styles for other elements can go here */
