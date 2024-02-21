@@ -1,4 +1,8 @@
 function getWeatherData() {
+
+    // Clear any previous error messages
+    document.getElementById('weatherDisplay').textContent = '';
+
     const location = document.getElementById('locationInput').value;
     const apiKey = '4c3c2f072539b24766caea7157784667';
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`;
